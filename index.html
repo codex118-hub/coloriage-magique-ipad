@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Coloriage Magique pour iPad</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Coloriage">
+  <meta name="theme-color" content="#FF70A6">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>">
+</head>
+<body>
+  <div id="app-container">
+    <!-- Top Bar: Navigation & Major Actions -->
+    <header id="top-bar">
+      <div class="header-left">
+        <button id="btn-gallery" class="btn-bubble btn-yellow" title="Bibliothèque de dessins">
+          <span class="btn-icon">📚</span>
+          <span class="btn-text">Modèles</span>
+        </button>
+        <button id="btn-upload" class="btn-bubble btn-orange" title="Transformer une photo ou ajouter un coloriage">
+          <span class="btn-icon">🪄</span>
+          <span class="btn-text">Convertir / Photo</span>
+        </button>
+      </div>
+
+      <div class="header-center">
+        <h1 class="game-title">🎨 Coloriage Magique</h1>
+      </div>
+
+      <div class="header-right">
+        <button id="btn-undo" class="btn-bubble btn-blue" title="Annuler">
+          <span class="btn-icon">↩️</span>
+        </button>
+        <button id="btn-redo" class="btn-bubble btn-blue" title="Rétablir">
+          <span class="btn-icon">↪️</span>
+        </button>
+        <button id="btn-sound" class="btn-bubble btn-purple" title="Son">
+          <span class="btn-icon" id="sound-icon">🔊</span>
+        </button>
+        <button id="btn-clear" class="btn-bubble btn-red" title="Recommencer">
+          <span class="btn-icon">🗑️</span>
+        </button>
+        <button id="btn-print" class="btn-bubble btn-mint" title="Imprimer le dessin">
+          <span class="btn-icon">🖨️</span>
+        </button>
+        <button id="btn-save" class="btn-bubble btn-green" title="Sauvegarder">
+          <span class="btn-icon">⭐</span>
+          <span class="btn-text">Sauver</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main id="workspace">
+      <!-- Left Toolbar: Tools selection -->
+      <aside id="tool-bar" class="sidebar">
+        <button class="tool-btn active" data-tool="bucket" title="Remplir la zone">
+          <span class="tool-emoji">🪣</span>
+          <span class="tool-name">Remplir</span>
+        </button>
+        <button class="tool-btn" data-tool="brush" title="Pinceau">
+          <span class="tool-emoji">🖌️</span>
+          <span class="tool-name">Pinceau</span>
+        </button>
+        <button class="tool-btn" data-tool="crayon" title="Crayon de cire">
+          <span class="tool-emoji">🖍️</span>
+          <span class="tool-name">Craie</span>
+        </button>
+        <button class="tool-btn" data-tool="glitter" title="Paillettes magiques">
+          <span class="tool-emoji">✨</span>
+          <span class="tool-name">Étoiles</span>
+        </button>
+        <button class="tool-btn" data-tool="sticker" title="Tampons amusants">
+          <span class="tool-emoji">🦄</span>
+          <span class="tool-name">Tampons</span>
+        </button>
+        <button class="tool-btn" data-tool="eraser" title="Gomme magique">
+          <span class="tool-emoji">🧼</span>
+          <span class="tool-name">Gomme</span>
+        </button>
+
+        <div class="divider"></div>
+
+        <!-- Brush Sizes -->
+        <div id="size-selector">
+          <button class="size-btn" data-size="12" title="Fin">
+            <span class="dot dot-sm"></span>
+          </button>
+          <button class="size-btn active" data-size="28" title="Moyen">
+            <span class="dot dot-md"></span>
+          </button>
+          <button class="size-btn" data-size="52" title="Gros">
+            <span class="dot dot-lg"></span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- Center: Canvas Area -->
+      <section id="canvas-container">
+        <div id="canvas-wrapper">
+          <!-- Background paper layer -->
+          <canvas id="bg-canvas"></canvas>
+          <!-- User drawings / colors layer -->
+          <canvas id="paint-canvas"></canvas>
+          <!-- Outlines / black lines layer (always on top so lines stay sharp) -->
+          <canvas id="outline-canvas"></canvas>
+          <!-- Cursor / effects layer -->
+          <canvas id="fx-canvas"></canvas>
+        </div>
+      </section>
+
+      <!-- Right/Bottom: Color Palette & Stamp Selector -->
+      <aside id="palette-bar" class="sidebar">
+        <!-- Palette container -->
+        <div id="palette-colors" class="palette-grid">
+          <!-- Populated by JavaScript with rich, bright child-friendly colors -->
+        </div>
+
+        <!-- Stamp selector panel (shown when stamp tool is active) -->
+        <div id="stamp-selector" class="stamp-grid hidden">
+          <button class="stamp-choice active" data-stamp="⭐">⭐</button>
+          <button class="stamp-choice" data-stamp="❤️">❤️</button>
+          <button class="stamp-choice" data-stamp="🌸">🌸</button>
+          <button class="stamp-choice" data-stamp="🐾">🐾</button>
+          <button class="stamp-choice" data-stamp="🌈">🌈</button>
+          <button class="stamp-choice" data-stamp="👑">👑</button>
+          <button class="stamp-choice" data-stamp="🚀">🚀</button>
+          <button class="stamp-choice" data-stamp="🍭">🍭</button>
+          <button class="stamp-choice" data-stamp="🦋">🦋</button>
+          <button class="stamp-choice" data-stamp="🦖">🦖</button>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <!-- Hidden File Input for Image Upload -->
+  <input type="file" id="file-input" accept="image/*" style="display: none;">
+
+  <!-- Modal: Preloaded Drawings Gallery -->
+  <div id="gallery-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2>📚 Choisis un dessin !</h2>
+        <button class="modal-close" id="gallery-close">✖</button>
+      </div>
+      <div class="modal-body gallery-grid" id="gallery-cards">
+        <!-- Cards injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Image Converter & Upload Studio -->
+  <div id="converter-modal" class="modal-overlay hidden">
+    <div class="modal-card modal-large">
+      <div class="modal-header">
+        <h2>🪄 Convertisseur d'image en coloriage</h2>
+        <button class="modal-close" id="converter-close">✖</button>
+      </div>
+      <div class="modal-body converter-body">
+        <div class="converter-source-selector">
+          <button id="btn-select-file" class="btn-bubble btn-orange">
+            📁 Choisir une photo / image depuis l'iPad
+          </button>
+          <span class="converter-hint">Prends une photo, choisis une image de la photothèque ou un coloriage téléchargé !</span>
+        </div>
+
+        <div class="converter-preview-row">
+          <div class="preview-box">
+            <h4>Image d'origine</h4>
+            <div class="preview-frame">
+              <img id="source-preview" alt="Aperçu original" src="" />
+              <div id="no-image-text">Aucune image sélectionnée</div>
+            </div>
+          </div>
+
+          <div class="preview-box">
+            <h4>Coloriage généré</h4>
+            <div class="preview-frame">
+              <canvas id="converted-preview-canvas"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mode Presets -->
+        <div class="converter-controls" id="converter-controls-box">
+          <div class="mode-tabs">
+            <button class="mode-btn active" data-mode="smart">
+              👶 Magique Enfant (Contours nets)
+            </button>
+            <button class="mode-btn" data-mode="photo">
+              📸 Photo réelle
+            </button>
+            <button class="mode-btn" data-mode="direct">
+              📄 Coloriage déjà prêt (Nettoyage rapide)
+            </button>
+          </div>
+
+          <!-- Fine tuning sliders -->
+          <div class="sliders-row">
+            <div class="slider-group">
+              <label for="slider-threshold">Contraste / Seuil : <span id="val-threshold">128</span></label>
+              <input type="range" id="slider-threshold" min="30" max="230" value="128">
+            </div>
+            <div class="slider-group">
+              <label for="slider-thickness">Épaisseur des traits : <span id="val-thickness">Moyen</span></label>
+              <input type="range" id="slider-thickness" min="1" max="4" value="2">
+            </div>
+            <div class="slider-group">
+              <label for="slider-smoothing">Lissage des bruits : <span id="val-smoothing">Normal</span></label>
+              <input type="range" id="slider-smoothing" min="0" max="3" value="1">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-apply-convert" class="btn-bubble btn-green btn-big" disabled>
+          🎉 Valider et commencer à colorier !
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confetti Canvas for celebration -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <script src="audio.js"></script>
+  <script src="templates.js"></script>
+  <script src="converter.js"></script>
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>
