@@ -482,6 +482,45 @@ html, body {
   flex: 1;
 }
 
+/* Onglets de catégories pour les dessins */
+.gallery-category-tabs {
+  display: flex;
+  gap: 10px;
+  padding: 12px 20px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  background: #f8fafc;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.cat-tab {
+  border: 2px solid #cbd5e1;
+  background: #ffffff;
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: #475569;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 2px 0 #cbd5e1;
+  transition: all 0.15s ease;
+}
+
+.cat-tab:active {
+  transform: translateY(2px);
+  box-shadow: none;
+}
+
+.cat-tab.active {
+  background: #ff6b8b;
+  border-color: #e84393;
+  color: #ffffff;
+  box-shadow: 0 4px 0 #c0392b;
+  transform: scale(1.04);
+}
+
 /* Grille de modèles prédéfinis */
 .gallery-grid {
   display: grid;

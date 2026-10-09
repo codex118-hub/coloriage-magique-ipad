@@ -641,9 +641,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function populateGallery() {
+  let activeCategory = 'all';
+
+  function populateGallery(category = 'all') {
+    activeCategory = category;
     galleryCards.innerHTML = '';
-    COLORING_TEMPLATES.forEach(tpl => {
+    const filtered = category === 'all' 
+      ? COLORING_TEMPLATES 
+      : COLORING_TEMPLATES.filter(tpl => tpl.category === category);
+
+    filtered.forEach(tpl => {
       const card = document.createElement('div');
       card.className = 'gallery-card';
 
@@ -666,6 +673,16 @@ document.addEventListener('DOMContentLoaded', () => {
       galleryCards.appendChild(card);
     });
   }
+
+  const catTabs = document.querySelectorAll('.cat-tab');
+  catTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      catTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      populateGallery(tab.dataset.cat);
+      window.soundManager.playPop();
+    });
+  });
 
   btnGallery.addEventListener('click', () => {
     galleryModal.classList.remove('hidden');

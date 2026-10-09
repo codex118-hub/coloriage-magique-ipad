@@ -22,6 +22,11 @@ Elle intègre un **convertisseur intelligent d'images et de photos en coloriages
 - **Couleur Arc-en-ciel 🌈 :** Change automatiquement de teinte à chaque coup de pinceau.
 - **Sons stimulants :** Petits bruits rigolos (plop, scintillements, fanfares de fête) entièrement synthétisés via l'API Web Audio (aucun chargement de fichier externe, 100% autonome et fluide).
 - **Confettis festifs 🎉 :** Une pluie de confettis célèbre l'enregistrement du chef-d'œuvre !
+- **Bibliothèque thématique avec onglets de tri :**
+  - 🐶 **Pat' Patrouille :** Chase le policier, Marcus le pompier, Stella l'aviatrice.
+  - 🥷 **Lego Ninjago :** Kai le ninja du feu (avec ses katanas et flammes), Lloyd le ninja vert (tourbillon Spinjitzu).
+  - 🦖 **Dinosaures Prédateurs Réalistes (détaillés) :** T-Rex rugissant au paysage volcanique, Vélociraptor agile à l'affût avec sa griffe en faucille, Spinosaure géant et sa voile dorsale.
+  - 🎨 **Mignons & Classiques :** Bébé dinosaure, fusée spatiale, chaton rigolo, papillon, voiture, licorne.
 
 ### 3. 📱 Optimisation iPad (Safari & Écran d'accueil)
 - Aucun zoom involontaire lors du dessin (`touch-action: none`, désactivation des gestes parasites de Safari).
