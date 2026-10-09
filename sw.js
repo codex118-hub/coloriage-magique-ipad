@@ -1,4 +1,4 @@
-const CACHE_NAME = 'coloriage-magic-v1';
+const CACHE_NAME = 'coloriage-magic-v2';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -7,7 +7,11 @@ const ASSETS_TO_CACHE = [
   './audio.js',
   './templates.js',
   './converter.js',
-  './manifest.json'
+  './manifest.json',
+  './assets/dinos/trex_predateur.png',
+  './assets/dinos/velociraptor_chasseur.png',
+  './assets/dinos/spinosaure_geant.png',
+  './assets/dinos/carnotaure_cornu.png'
 ];
 
 self.addEventListener('install', (event) => {

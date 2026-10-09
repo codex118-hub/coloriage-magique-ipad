@@ -349,219 +349,32 @@ const COLORING_TEMPLATES = [
   },
 
   // ------------------------------------------------------
-  // DINOSAURES PRÉDATEURS RÉALISTES (PLUS DÉTAILLÉS & ÂGÉS)
+  // DINOSAURES PRÉDATEURS RÉALISTES (LIGNES FINES & PRÉCISES)
+  // Illustrations professionnelles détaillées de haute qualité
   // ------------------------------------------------------
   {
-    id: 'trex-predator',
+    id: 'trex-realiste',
     category: 'predators',
-    title: '🦖 T-Rex Prédateur Féroce',
-    svg: `<svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-      <rect width="600" height="600" fill="#ffffff"/>
-      <!-- Paysage crétacé : Volcan en éruption et ptérodactyle -->
-      <polygon points="50,420 180,240 280,420" fill="#ffffff" stroke="#1e293b" stroke-width="6"/>
-      <path d="M 160 240 Q 180 210 180 160 Q 200 210 200 240" fill="#ffffff" stroke="#1e293b" stroke-width="6"/>
-      <!-- Nuage de fumée volcanique -->
-      <circle cx="180" cy="140" r="28" fill="#ffffff" stroke="#1e293b" stroke-width="5"/>
-      <circle cx="210" cy="110" r="32" fill="#ffffff" stroke="#1e293b" stroke-width="5"/>
-      <circle cx="240" cy="90" r="26" fill="#ffffff" stroke="#1e293b" stroke-width="5"/>
-
-      <!-- Ptérodactyle au loin dans le ciel -->
-      <path d="M 460 120 Q 480 90 510 110 L 490 125 Q 520 115 540 135 L 500 135 Z" fill="#ffffff" stroke="#1e293b" stroke-width="5"/>
-
-      <!-- Sol rocheux et fougères préhistoriques -->
-      <path d="M 0 540 Q 250 510 600 540 L 600 600 L 0 600 Z" fill="#ffffff" stroke="#1e293b" stroke-width="8"/>
-      <!-- Fougère géante à droite -->
-      <path d="M 540 540 Q 560 460 510 420 Q 570 480 540 540" fill="#ffffff" stroke="#1e293b" stroke-width="5"/>
-      <path d="M 540 500 Q 580 450 590 410 Q 560 460 540 500" fill="#ffffff" stroke="#1e293b" stroke-width="5"/>
-
-      <!-- Queue massive du T-Rex en contrepoids -->
-      <path d="M 180 340 Q 80 300 20 220 Q 40 310 140 390 Z" fill="#ffffff" stroke="#1e293b" stroke-width="8"/>
-
-      <!-- Cuisse et patte gauche (en arrière) -->
-      <path d="M 180 360 Q 160 440 200 480 L 190 540 L 140 545 L 145 525 L 160 520 L 170 470" fill="#ffffff" stroke="#1e293b" stroke-width="7"/>
-
-      <!-- Corps musclé, côtes et dos épineux -->
-      <path d="M 180 340 Q 240 280 320 260 L 380 290 Q 320 390 260 410 Q 180 430 180 340 Z" fill="#ffffff" stroke="#1e293b" stroke-width="8"/>
-      <!-- Stries de musculature et écailles du dos -->
-      <path d="M 220 290 L 230 270 L 245 285" fill="#ffffff" stroke="#1e293b" stroke-width="5"/>
-      <path d="M 260 275 L 275 255 L 285 270" fill="#ffffff" stroke="#1e293b" stroke-width="5"/>
-      <path d="M 300 265 L 315 245 L 325 260" fill="#ffffff" stroke="#1e293b" stroke-width="5"/>
-
-      <!-- Bras court de prédateur à 2 griffes acérées -->
-      <path d="M 310 350 Q 330 380 345 370 L 360 380 L 350 365 L 362 360 L 335 345" fill="#ffffff" stroke="#1e293b" stroke-width="6"/>
-
-      <!-- Patte droite puissante (au premier plan) -->
-      <ellipse cx="270" cy="380" rx="45" ry="60" fill="#ffffff" stroke="#1e293b" stroke-width="8"/>
-      <!-- Mollet et jarret puissant -->
-      <path d="M 260 430 Q 295 450 280 500 L 270 545" fill="#ffffff" stroke="#1e293b" stroke-width="8"/>
-      <!-- Pied theropode à 3 grandes serres acérées -->
-      <path d="M 240 545 L 200 550 L 230 535 L 270 535 L 310 550 L 280 535 L 270 510" fill="#ffffff" stroke="#1e293b" stroke-width="8" stroke-linejoin="round"/>
-      <!-- Griffes tranchantes courbées -->
-      <polygon points="195,550 180,560 205,552" fill="#1e293b"/>
-      <polygon points="250,555 245,570 260,555" fill="#1e293b"/>
-      <polygon points="310,550 325,562 305,553" fill="#1e293b"/>
-
-      <!-- Cou musclé tendu en avant -->
-      <path d="M 320 260 Q 380 210 420 180 L 450 240 Q 380 290 350 310" fill="#ffffff" stroke="#1e293b" stroke-width="8"/>
-
-      <!-- Tête imposante et mâchoire de prédateur grand ouverte ! -->
-      <!-- Crâne supérieur avec arcade sourcilière menaçante -->
-      <path d="M 400 190 Q 420 130 500 130 Q 570 140 580 190 L 530 200 Q 480 195 460 220 Z" fill="#ffffff" stroke="#1e293b" stroke-width="8"/>
-      <!-- Oeil reptilien féroce et creux temporal -->
-      <polygon points="450,165 470,160 460,175" fill="#ffffff" stroke="#1e293b" stroke-width="5"/>
-      <ellipse cx="460" cy="167" rx="4" ry="7" fill="#1e293b"/>
-      <ellipse cx="495" cy="155" rx="14" ry="9" fill="#ffffff" stroke="#1e293b" stroke-width="5"/>
-      <circle cx="550" cy="165" r="5" fill="#1e293b"/> <!-- Narine -->
-
-      <!-- Dents supérieures acérées et recourbées -->
-      <polygon points="565,190 560,208 552,192" fill="#ffffff" stroke="#1e293b" stroke-width="5"/>
-      <polygon points="545,193 540,215 532,195" fill="#ffffff" stroke="#1e293b" stroke-width="5"/>
-      <polygon points="525,195 518,220 510,197" fill="#ffffff" stroke="#1e293b" stroke-width="5"/>
-      <polygon points="500,198 494,218 488,200" fill="#ffffff" stroke="#1e293b" stroke-width="5"/>
-      <polygon points="480,202 475,216 470,204" fill="#ffffff" stroke="#1e293b" stroke-width="5"/>
-
-      <!-- Gueule ouverte et langue -->
-      <path d="M 460 220 Q 500 240 520 210" fill="#ffffff" stroke="#1e293b" stroke-width="6"/>
-
-      <!-- Mâchoire inférieure puissante -->
-      <path d="M 450 250 L 565 240 Q 575 255 550 270 L 440 280 Q 430 260 450 250 Z" fill="#ffffff" stroke="#1e293b" stroke-width="8"/>
-      <!-- Dents inférieures pointues qui s'imbriquent -->
-      <polygon points="555,242 550,225 542,243" fill="#ffffff" stroke="#1e293b" stroke-width="5"/>
-      <polygon points="535,244 528,226 522,245" fill="#ffffff" stroke="#1e293b" stroke-width="5"/>
-      <polygon points="515,246 508,230 502,247" fill="#ffffff" stroke="#1e293b" stroke-width="5"/>
-      <polygon points="492,248 488,234 480,250" fill="#ffffff" stroke="#1e293b" stroke-width="5"/>
-    </svg>`
+    title: '🦖 T-Rex Prédateur Réaliste',
+    imageSrc: 'assets/dinos/trex_predateur.png'
   },
   {
-    id: 'velociraptor',
+    id: 'velociraptor-realiste',
     category: 'predators',
-    title: '⚡ Vélociraptor à l\'Affût',
-    svg: `<svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-      <rect width="600" height="600" fill="#ffffff"/>
-      <!-- Jungle crétacée : Grandes feuilles de fougères et roche -->
-      <path d="M 0 530 Q 300 500 600 530 L 600 600 L 0 600 Z" fill="#ffffff" stroke="#1e293b" stroke-width="8"/>
-      <path d="M 40 450 Q 120 410 80 530" fill="none" stroke="#1e293b" stroke-width="6"/>
-      <path d="M 50 480 Q 150 460 110 530" fill="none" stroke="#1e293b" stroke-width="5"/>
-      <!-- Boulders / Rochers sous ses pattes -->
-      <path d="M 320 530 Q 360 490 440 510 Q 480 540 450 550 Z" fill="#ffffff" stroke="#1e293b" stroke-width="7"/>
-
-      <!-- Longue queue rigide et tendue pour l'équilibre -->
-      <path d="M 210 320 Q 110 260 20 250 Q 80 300 180 360 Z" fill="#ffffff" stroke="#1e293b" stroke-width="8"/>
-      <!-- Plumes/crêtes le long de la queue du raptor -->
-      <path d="M 30 255 L 20 240 L 45 255" fill="#ffffff" stroke="#1e293b" stroke-width="5"/>
-      <path d="M 70 265 L 60 245 L 85 265" fill="#ffffff" stroke="#1e293b" stroke-width="5"/>
-      <path d="M 110 280 L 100 258 L 125 280" fill="#ffffff" stroke="#1e293b" stroke-width="5"/>
-
-      <!-- Patte arrière gauche (en arrière-plan) -->
-      <path d="M 190 350 Q 170 420 220 450 L 210 515 L 180 520" fill="#ffffff" stroke="#1e293b" stroke-width="7"/>
-
-      <!-- Corps aérodynamique et musclé -->
-      <path d="M 210 320 Q 280 270 360 280 Q 370 340 310 380 Q 230 400 210 320 Z" fill="#ffffff" stroke="#1e293b" stroke-width="8"/>
-
-      <!-- Patte arrière droite avec la redoutable GRIFFE EN FAUCILLE levée ! -->
-      <ellipse cx="260" cy="370" rx="35" ry="50" fill="#ffffff" stroke="#1e293b" stroke-width="8"/>
-      <path d="M 255 420 Q 285 450 270 490 L 300 515" fill="#ffffff" stroke="#1e293b" stroke-width="8"/>
-      <!-- Le pied du raptor : orteil porteur + Griffe géante relevée -->
-      <path d="M 290 515 L 340 525 L 310 510 L 280 500" fill="#ffffff" stroke="#1e293b" stroke-width="7"/>
-      <!-- LA GRIFFE EN FAUCILLE (emblème du vélociraptor) recourbée vers le haut -->
-      <path d="M 270 495 Q 260 450 285 440 Q 295 460 285 495 Z" fill="#ffffff" stroke="#1e293b" stroke-width="7"/>
-      <polygon points="280,442 288,430 292,448" fill="#1e293b"/>
-      <!-- Griffes des autres orteils au sol -->
-      <polygon points="340,525 355,530 338,530" fill="#1e293b"/>
-
-      <!-- Bras agile avec plumes/ailes de chasseur et 3 griffes saisissantes -->
-      <path d="M 330 320 Q 370 360 385 345 L 420 360 L 400 340 L 425 335 L 390 320" fill="#ffffff" stroke="#1e293b" stroke-width="7"/>
-      <!-- Aigrettes de plumes sur l'avant-bras -->
-      <path d="M 345 330 L 330 365 L 360 345" fill="#ffffff" stroke="#1e293b" stroke-width="5"/>
-      <path d="M 365 340 L 350 375 L 380 350" fill="#ffffff" stroke="#1e293b" stroke-width="5"/>
-
-      <!-- Cou en S de prédateur rapide -->
-      <path d="M 340 280 Q 400 240 430 180 L 470 220 Q 410 290 370 300" fill="#ffffff" stroke="#1e293b" stroke-width="8"/>
-
-      <!-- Tête allongée de vélociraptor avec mâchoires garnies de dents acérées -->
-      <path d="M 430 180 Q 490 140 560 160 Q 570 180 540 195 L 470 215 Z" fill="#ffffff" stroke="#1e293b" stroke-width="8"/>
-      <!-- Œil perçant et narine -->
-      <circle cx="465" cy="175" r="10" fill="#ffffff" stroke="#1e293b" stroke-width="5"/>
-      <ellipse cx="465" cy="175" rx="3" ry="7" fill="#1e293b"/>
-      <circle cx="535" cy="170" r="4" fill="#1e293b"/>
-
-      <!-- Dents acérées de prédateur -->
-      <polygon points="545,185 540,196 535,186" fill="#ffffff" stroke="#1e293b" stroke-width="4"/>
-      <polygon points="528,187 523,200 518,188" fill="#ffffff" stroke="#1e293b" stroke-width="4"/>
-      <polygon points="510,190 505,203 500,192" fill="#ffffff" stroke="#1e293b" stroke-width="4"/>
-      <polygon points="492,195 487,208 482,197" fill="#ffffff" stroke="#1e293b" stroke-width="4"/>
-
-      <!-- Mâchoire inférieure prête à claquer -->
-      <path d="M 470 215 L 545 205 Q 550 218 530 225 L 460 235 Z" fill="#ffffff" stroke="#1e293b" stroke-width="7"/>
-      <polygon points="535,208 530,198 525,208" fill="#ffffff" stroke="#1e293b" stroke-width="4"/>
-      <polygon points="515,210 510,200 505,212" fill="#ffffff" stroke="#1e293b" stroke-width="4"/>
-    </svg>`
+    title: '⚡ Vélociraptor Chasseur Féroce',
+    imageSrc: 'assets/dinos/velociraptor_chasseur.png'
   },
   {
-    id: 'spinosaurus',
+    id: 'spinosaure-realiste',
     category: 'predators',
-    title: '🐊 Spinosaure Géant',
-    svg: `<svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-      <rect width="600" height="600" fill="#ffffff"/>
-      <!-- Rivière préhistorique et berge -->
-      <path d="M 0 510 Q 300 480 600 510 L 600 600 L 0 600 Z" fill="#ffffff" stroke="#1e293b" stroke-width="8"/>
-      <!-- Vagues d'eau au premier plan -->
-      <path d="M 50 550 Q 120 530 190 550 Q 260 570 330 550 Q 400 530 470 550" fill="none" stroke="#1e293b" stroke-width="6"/>
-      <!-- Poisson préhistorique sauté hors de l'eau -->
-      <path d="M 80 470 Q 110 440 140 470 Q 110 490 80 470 Z" fill="#ffffff" stroke="#1e293b" stroke-width="5"/>
-      <polygon points="75,470 60,455 65,485" fill="#ffffff" stroke="#1e293b" stroke-width="5"/>
-
-      <!-- LA GRANDE VOILE DORSALE EMBLÉMATIQUE (Spines neurales géantes) -->
-      <path d="M 190 320 Q 230 110 320 100 Q 390 120 410 270 Z" fill="#ffffff" stroke="#1e293b" stroke-width="9"/>
-      <!-- Rayons / épines osseuses de la voile -->
-      <line x1="220" y1="300" x2="245" y2="135" stroke="#1e293b" stroke-width="6"/>
-      <line x1="260" y1="280" x2="280" y2="110" stroke="#1e293b" stroke-width="6"/>
-      <line x1="300" y1="270" x2="315" y2="102" stroke="#1e293b" stroke-width="6"/>
-      <line x1="340" y1="270" x2="350" y2="110" stroke="#1e293b" stroke-width="6"/>
-      <line x1="375" y1="275" x2="385" y2="140" stroke="#1e293b" stroke-width="6"/>
-
-      <!-- Queue palmée natatoire de spinosaure -->
-      <path d="M 190 320 Q 90 280 20 260 Q 60 340 160 390 Z" fill="#ffffff" stroke="#1e293b" stroke-width="8"/>
-      <!-- Crête caudale natatoire -->
-      <path d="M 30 265 Q 90 230 160 280" fill="#ffffff" stroke="#1e293b" stroke-width="6"/>
-
-      <!-- Corps massif semi-aquatique -->
-      <path d="M 190 320 Q 280 270 410 270 Q 420 360 330 400 Q 210 420 190 320 Z" fill="#ffffff" stroke="#1e293b" stroke-width="8"/>
-
-      <!-- Patte arrière robuste -->
-      <ellipse cx="260" cy="380" rx="40" ry="55" fill="#ffffff" stroke="#1e293b" stroke-width="8"/>
-      <path d="M 250 430 Q 280 460 270 500 L 260 540 L 210 545 L 245 530" fill="#ffffff" stroke="#1e293b" stroke-width="8"/>
-      <polygon points="205,545 190,555 215,550" fill="#1e293b"/>
-      <polygon points="260,542 275,555 255,552" fill="#1e293b"/>
-
-      <!-- Patte avant puissante avec GRANDE GRIFFE DE PÊCHEUR TRIDACTYLE -->
-      <path d="M 360 340 Q 410 410 415 440 L 440 455 L 420 440 L 445 435 L 390 340" fill="#ffffff" stroke="#1e293b" stroke-width="7"/>
-      <polygon points="440,455 455,465 435,460" fill="#1e293b"/>
-      <polygon points="445,435 460,442 440,440" fill="#1e293b"/>
-
-      <!-- Cou épais tendu vers l'avant -->
-      <path d="M 400 270 Q 450 240 470 230 L 490 280 Q 440 330 380 340" fill="#ffffff" stroke="#1e293b" stroke-width="8"/>
-
-      <!-- Museau allongé crocodilien caractéristique du spinosaure -->
-      <path d="M 470 230 Q 530 210 580 215 Q 585 230 560 240 L 480 260 Z" fill="#ffffff" stroke="#1e293b" stroke-width="8"/>
-      <!-- Petite crête nasale au-dessus des yeux -->
-      <polygon points="485,225 495,208 505,225" fill="#ffffff" stroke="#1e293b" stroke-width="5"/>
-      <!-- Œil et narine reculée -->
-      <circle cx="490" cy="235" r="8" fill="#ffffff" stroke="#1e293b" stroke-width="5"/>
-      <ellipse cx="490" cy="235" rx="3" ry="6" fill="#1e293b"/>
-      <circle cx="530" cy="225" r="4" fill="#1e293b"/>
-
-      <!-- Dents coniques interverrouillées faites pour attraper les proies glissantes -->
-      <polygon points="565,225 560,238 554,226" fill="#ffffff" stroke="#1e293b" stroke-width="4"/>
-      <polygon points="545,228 540,242 534,228" fill="#ffffff" stroke="#1e293b" stroke-width="4"/>
-      <polygon points="525,232 520,246 514,233" fill="#ffffff" stroke="#1e293b" stroke-width="4"/>
-      <polygon points="505,236 500,250 494,238" fill="#ffffff" stroke="#1e293b" stroke-width="4"/>
-
-      <!-- Mâchoire inférieure allongée -->
-      <path d="M 480 260 L 570 242 Q 575 255 555 265 L 470 280 Z" fill="#ffffff" stroke="#1e293b" stroke-width="7"/>
-      <polygon points="555,248 550,236 544,248" fill="#ffffff" stroke="#1e293b" stroke-width="4"/>
-      <polygon points="535,252 530,240 524,252" fill="#ffffff" stroke="#1e293b" stroke-width="4"/>
-    </svg>`
+    title: '🐊 Spinosaure Géant des Marais',
+    imageSrc: 'assets/dinos/spinosaure_geant.png'
+  },
+  {
+    id: 'carnotaure-realiste',
+    category: 'predators',
+    title: '🦏 Carnotaure Cornu du Crétacé',
+    imageSrc: 'assets/dinos/carnotaure_cornu.png'
   },
 
   // ------------------------------------------------------
@@ -829,7 +642,22 @@ const COLORING_TEMPLATES = [
   }
 ];
 
-// Helper pour convertir un SVG en image exploitable par Canvas
+// Helper pour convertir un SVG ou charger une image externe en Image HTML exploitable par Canvas
+function loadTemplateToImage(template) {
+  return new Promise((resolve, reject) => {
+    if (template.imageSrc) {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = reject;
+      img.src = template.imageSrc;
+    } else if (template.svg) {
+      loadSvgToImage(template.svg).then(resolve).catch(reject);
+    } else {
+      reject(new Error("Modèle sans SVG ni imageSrc"));
+    }
+  });
+}
+
 function loadSvgToImage(svgString) {
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -843,3 +671,6 @@ function loadSvgToImage(svgString) {
     img.src = url;
   });
 }
+
+window.loadTemplateToImage = loadTemplateToImage;
+window.loadSvgToImage = loadSvgToImage;

@@ -25,7 +25,7 @@ Elle intègre un **convertisseur intelligent d'images et de photos en coloriages
 - **Bibliothèque thématique avec onglets de tri :**
   - 🐶 **Pat' Patrouille :** Chase le policier, Marcus le pompier, Stella l'aviatrice.
   - 🥷 **Lego Ninjago :** Kai le ninja du feu (avec ses katanas et flammes), Lloyd le ninja vert (tourbillon Spinjitzu).
-  - 🦖 **Dinosaures Prédateurs Réalistes (détaillés) :** T-Rex rugissant au paysage volcanique, Vélociraptor agile à l'affût avec sa griffe en faucille, Spinosaure géant et sa voile dorsale.
+  - 🦖 **Dinosaures Prédateurs Réalistes (Haute Qualité & Traits Fins) :** Illustrations professionnelles ultra-détaillées avec écailles anatomiques, mâchoires redoutables, griffes et paysages jurassiques (T-Rex féroce, Vélociraptor à l'affût, Spinosaure géant des marais, Carnotaure cornu).
   - 🎨 **Mignons & Classiques :** Bébé dinosaure, fusée spatiale, chaton rigolo, papillon, voiture, licorne.
 
 ### 3. 📱 Optimisation iPad (Safari & Écran d'accueil)

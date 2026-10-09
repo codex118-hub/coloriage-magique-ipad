@@ -286,7 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const outG = outlineData[startIndex + 1];
     const outB = outlineData[startIndex + 2];
     const outA = outlineData[startIndex + 3];
-    const isLine = (outA > 100 && (0.299 * outR + 0.587 * outG + 0.114 * outB) < 100);
+    const isLine = (outA > 80 && (0.299 * outR + 0.587 * outG + 0.114 * outB) < 135);
     if (isLine) {
       return; // Clic sur le trait noir
     }
@@ -320,9 +320,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Est-ce un trait noir dans l'outline ?
       const oA = outlineData[pOffset + 3];
-      if (oA > 80) {
+      if (oA > 70) {
         const lum = 0.299 * outlineData[pOffset] + 0.587 * outlineData[pOffset + 1] + 0.114 * outlineData[pOffset + 2];
-        if (lum < 110) return false; // C'est un contour !
+        if (lum < 135) return false; // C'est un contour !
       }
 
       // Est-ce la couleur cliquée à l'origine sur paintCanvas ?
@@ -632,12 +632,12 @@ document.addEventListener('DOMContentLoaded', () => {
     updateUndoRedoButtons();
 
     try {
-      const img = await window.loadSvgToImage(template.svg);
+      const img = await window.loadTemplateToImage(template);
       outlineCtx.clearRect(0, 0, state.canvasWidth, state.canvasHeight);
       outlineCtx.drawImage(img, 0, 0, state.canvasWidth, state.canvasHeight);
       window.soundManager.playPop();
     } catch (err) {
-      console.error('Erreur chargement SVG:', err);
+      console.error('Erreur chargement template:', err);
     }
   }
 
@@ -654,10 +654,18 @@ document.addEventListener('DOMContentLoaded', () => {
       const card = document.createElement('div');
       card.className = 'gallery-card';
 
-      // Aperçu SVG miniature
-      const thumb = document.createElement('div');
-      thumb.className = 'gallery-thumb';
-      thumb.innerHTML = tpl.svg;
+      // Aperçu miniature (Image externe ou SVG vectoriel)
+      let thumb;
+      if (tpl.imageSrc) {
+        thumb = document.createElement('img');
+        thumb.className = 'gallery-thumb';
+        thumb.src = tpl.imageSrc;
+        thumb.alt = tpl.title;
+      } else {
+        thumb = document.createElement('div');
+        thumb.className = 'gallery-thumb';
+        thumb.innerHTML = tpl.svg;
+      }
 
       const title = document.createElement('h4');
       title.textContent = tpl.title;
