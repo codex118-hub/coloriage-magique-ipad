@@ -349,31 +349,31 @@ const COLORING_TEMPLATES = [
   },
 
   // ------------------------------------------------------
-  // DINOSAURES PRÉDATEURS RÉALISTES (LIGNES FINES & PRÉCISES)
-  // Illustrations professionnelles détaillées de haute qualité
+  // DINOSAURES PRÉDATEURS RÉALISTES (GRANDS TRAITS COLORIABLES)
+  // Contours nets, peau lisse sans hachures, sans plantes
   // ------------------------------------------------------
+  {
+    id: 'duel-trex-spinosaure',
+    category: 'predators',
+    title: '💥 Duel T-Rex vs Spinosaure',
+    imageSrc: 'assets/dinos/duel_trex_spinosaure.png'
+  },
   {
     id: 'trex-realiste',
     category: 'predators',
-    title: '🦖 T-Rex Prédateur Réaliste',
+    title: '🦖 T-Rex Prédateur (Grands Traits)',
     imageSrc: 'assets/dinos/trex_predateur.png'
-  },
-  {
-    id: 'velociraptor-realiste',
-    category: 'predators',
-    title: '⚡ Vélociraptor Chasseur Féroce',
-    imageSrc: 'assets/dinos/velociraptor_chasseur.png'
   },
   {
     id: 'spinosaure-realiste',
     category: 'predators',
-    title: '🐊 Spinosaure Géant des Marais',
+    title: '🐊 Spinosaure Géant (Voile Dorsale)',
     imageSrc: 'assets/dinos/spinosaure_geant.png'
   },
   {
     id: 'carnotaure-realiste',
     category: 'predators',
-    title: '🦏 Carnotaure Cornu du Crétacé',
+    title: '🦏 Carnotaure Cornu (Traits Épurés)',
     imageSrc: 'assets/dinos/carnotaure_cornu.png'
   },
 

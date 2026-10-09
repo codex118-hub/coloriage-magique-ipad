@@ -1,4 +1,4 @@
-const CACHE_NAME = 'coloriage-magic-v2';
+const CACHE_NAME = 'coloriage-magic-v3';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -8,8 +8,8 @@ const ASSETS_TO_CACHE = [
   './templates.js',
   './converter.js',
   './manifest.json',
+  './assets/dinos/duel_trex_spinosaure.png',
   './assets/dinos/trex_predateur.png',
-  './assets/dinos/velociraptor_chasseur.png',
   './assets/dinos/spinosaure_geant.png',
   './assets/dinos/carnotaure_cornu.png'
 ];
