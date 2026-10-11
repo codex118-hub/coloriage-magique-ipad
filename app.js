@@ -74,6 +74,9 @@ document.addEventListener('DOMContentLoaded', () => {
     { color: 'rainbow', name: 'Arc-en-ciel', isRainbow: true }
   ];
 
+  // Résolution interne fixe : nette sur écran Retina, et rien à redessiner quand l'iPad tourne
+  const CANVAS_SIZE = 1024;
+
   // --- État de l'application ---
   const state = {
     tool: 'bucket',           // 'bucket', 'brush', 'crayon', 'glitter', 'sticker', 'eraser'
@@ -87,9 +90,10 @@ document.addEventListener('DOMContentLoaded', () => {
     lastY: 0,
     history: [],              // Pile d'annulation (snapshots de paintCanvas)
     redoHistory: [],
-    maxHistory: 15,
-    canvasWidth: 800,
-    canvasHeight: 800,
+    maxHistory: 12,
+    canvasWidth: CANVAS_SIZE,
+    canvasHeight: CANVAS_SIZE,
+    scale: 1,                 // Pixels du canvas par pixel affiché (pour garder la taille des pinceaux)
     currentTemplateId: null
   };
 
@@ -99,29 +103,27 @@ document.addEventListener('DOMContentLoaded', () => {
   // INITIALISATION DU CANVAS ET REDIMENSIONNEMENT
   // ========================================================
   function initCanvasDimensions() {
-    const rect = canvasContainer.getBoundingClientRect();
-    const padding = 24;
-    const availW = Math.max(300, rect.width - padding);
-    const availH = Math.max(300, rect.height - padding);
-
-    // Dimension carrée ou 4:3 optimale pour coloriage
-    let size = Math.min(availW, availH);
-    size = Math.min(size, 850); // Plafond netteté/performance
-
-    state.canvasWidth = size;
-    state.canvasHeight = size;
-
-    canvasWrapper.style.width = `${size}px`;
-    canvasWrapper.style.height = `${size}px`;
-
     [bgCanvas, paintCanvas, outlineCanvas, fxCanvas].forEach(canv => {
-      canv.width = size;
-      canv.height = size;
+      canv.width = CANVAS_SIZE;
+      canv.height = CANVAS_SIZE;
     });
 
     // Fond papier blanc doux
     bgCtx.fillStyle = '#ffffff';
-    bgCtx.fillRect(0, 0, size, size);
+    bgCtx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+  }
+
+  // Taille affichée uniquement (CSS) : le contenu des canvas n'est jamais touché
+  function layoutCanvas() {
+    const rect = canvasContainer.getBoundingClientRect();
+    const padding = 24;
+    const availW = Math.max(300, rect.width - padding);
+    const availH = Math.max(300, rect.height - padding);
+    const size = Math.min(availW, availH);
+
+    canvasWrapper.style.width = `${size}px`;
+    canvasWrapper.style.height = `${size}px`;
+    state.scale = CANVAS_SIZE / size;
   }
 
   // ========================================================
@@ -216,8 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ========================================================
   // HISTORIQUE (ANNULER / RÉTABLIR)
   // ========================================================
-  function saveSnapshot() {
-    const snapshot = paintCtx.getImageData(0, 0, state.canvasWidth, state.canvasHeight);
+  function saveSnapshot(snapshot = paintCtx.getImageData(0, 0, state.canvasWidth, state.canvasHeight)) {
     state.history.push(snapshot);
     if (state.history.length > state.maxHistory) {
       state.history.shift();
@@ -395,6 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     paintCtx.putImageData(paintImgData, 0, 0);
     window.soundManager.playPop();
+    return true;
   }
 
   function hexToRgb(hex) {
@@ -480,9 +482,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Outil Remplissage (Pot de peinture)
     if (state.tool === 'bucket') {
-      saveSnapshot();
+      // Pas d'étape « Annuler » vide si on touche un trait ou une zone déjà de cette couleur
+      const before = paintCtx.getImageData(0, 0, state.canvasWidth, state.canvasHeight);
       const col = state.isRainbow ? 'rainbow' : state.color;
-      floodFill(coords.x, coords.y, col);
+      if (floodFill(coords.x, coords.y, col)) saveSnapshot(before);
       return;
     }
 
@@ -533,13 +536,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (state.tool === 'eraser') {
       paintCtx.globalCompositeOperation = 'destination-out';
       paintCtx.strokeStyle = 'rgba(0,0,0,1)';
-      paintCtx.lineWidth = state.brushSize * 1.5;
+      paintCtx.lineWidth = state.brushSize * 1.5 * state.scale;
       paintCtx.lineCap = 'round';
       paintCtx.lineJoin = 'round';
     } else if (state.tool === 'crayon') {
       paintCtx.globalCompositeOperation = 'source-over';
       paintCtx.strokeStyle = getCurrentColor();
-      paintCtx.lineWidth = state.brushSize;
+      paintCtx.lineWidth = state.brushSize * state.scale;
       paintCtx.lineCap = 'round';
       paintCtx.lineJoin = 'round';
       paintCtx.globalAlpha = 0.65;
@@ -547,7 +550,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Pinceau standard
       paintCtx.globalCompositeOperation = 'source-over';
       paintCtx.strokeStyle = getCurrentColor();
-      paintCtx.lineWidth = state.brushSize;
+      paintCtx.lineWidth = state.brushSize * state.scale;
       paintCtx.lineCap = 'round';
       paintCtx.lineJoin = 'round';
       paintCtx.globalAlpha = 1.0;
@@ -562,11 +565,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function drawGlitter(x, y) {
     const numStars = 4;
+    const size = state.brushSize * state.scale;
     paintCtx.save();
     for (let i = 0; i < numStars; i++) {
-      const offsetX = (Math.random() - 0.5) * state.brushSize * 1.6;
-      const offsetY = (Math.random() - 0.5) * state.brushSize * 1.6;
-      const starSize = Math.random() * (state.brushSize * 0.4) + 6;
+      const offsetX = (Math.random() - 0.5) * size * 1.6;
+      const offsetY = (Math.random() - 0.5) * size * 1.6;
+      const starSize = Math.random() * (size * 0.4) + 6 * state.scale;
       const col = getCurrentColor();
 
       drawStar(paintCtx, x + offsetX, y + offsetY, 5, starSize, starSize / 2, col);
@@ -600,7 +604,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function drawSticker(x, y, emoji) {
-    const size = state.brushSize * 2.2;
+    const size = state.brushSize * 2.2 * state.scale;
     paintCtx.save();
     paintCtx.font = `${size}px "Apple Color Emoji", "Segoe UI Emoji", sans-serif`;
     paintCtx.textAlign = 'center';
@@ -866,13 +870,29 @@ document.addEventListener('DOMContentLoaded', () => {
     expCtx.globalCompositeOperation = 'multiply';
     expCtx.drawImage(outlineCanvas, 0, 0);
 
-    const dataUrl = exportCanvas.toDataURL('image/png');
-    const a = document.createElement('a');
-    a.href = dataUrl;
-    a.download = `mon_coloriage_${Date.now()}.png`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    const fileName = `mon_coloriage_${Date.now()}.png`;
+    exportCanvas.toBlob(async (blob) => {
+      // Sur iPad : feuille de partage → « Enregistrer l'image » l'envoie dans Photos
+      const file = new File([blob], fileName, { type: 'image/png' });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        try {
+          await navigator.share({ files: [file] });
+        } catch (err) {
+          // Partage annulé : rien à faire
+        }
+        return;
+      }
+
+      // Ordinateur : téléchargement classique
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 5000);
+    }, 'image/png');
   });
 
   // ========================================================
@@ -939,30 +959,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // DÉMARRAGE INITIAL
   // ========================================================
   initCanvasDimensions();
+  layoutCanvas();
   buildPalette();
   populateGallery();
 
-  // Charger le premier modèle par défaut (Bébé Dinosaure)
+  // Charger le premier modèle par défaut
   if (COLORING_TEMPLATES.length > 0) {
     loadTemplate(COLORING_TEMPLATES[0]);
   }
 
-  // Recalcul sur rotation d'écran iPad (portrait <-> paysage)
-  window.addEventListener('resize', () => {
-    // Si l'utilisateur a déjà peint, on sauvegarde la peinture
-    const tempPaint = document.createElement('canvas');
-    tempPaint.width = paintCanvas.width;
-    tempPaint.height = paintCanvas.height;
-    tempPaint.getContext('2d').drawImage(paintCanvas, 0, 0);
-
-    const tempOutline = document.createElement('canvas');
-    tempOutline.width = outlineCanvas.width;
-    tempOutline.height = outlineCanvas.height;
-    tempOutline.getContext('2d').drawImage(outlineCanvas, 0, 0);
-
-    initCanvasDimensions();
-
-    paintCtx.drawImage(tempPaint, 0, 0, state.canvasWidth, state.canvasHeight);
-    outlineCtx.drawImage(tempOutline, 0, 0, state.canvasWidth, state.canvasHeight);
-  });
+  // Rotation d'écran iPad (portrait <-> paysage) : seule la taille affichée change
+  window.addEventListener('resize', layoutCanvas);
 });

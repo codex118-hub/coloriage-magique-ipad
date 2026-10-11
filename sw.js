@@ -1,5 +1,8 @@
-const CACHE_NAME = 'coloriage-magic-v3';
-const ASSETS_TO_CACHE = [
+// Réseau d'abord, cache en secours : l'iPad reçoit toujours la dernière version
+// quand il est connecté, et l'appli marche hors-ligne avec ce qui a déjà été chargé.
+// Pas de numéro de version à changer à la main.
+const CACHE_NAME = 'coloriage-magic';
+const CORE_FILES = [
   './',
   './index.html',
   './style.css',
@@ -8,36 +11,34 @@ const ASSETS_TO_CACHE = [
   './templates.js',
   './converter.js',
   './manifest.json',
-  './assets/dinos/duel_trex_spinosaure.png',
-  './assets/dinos/trex_predateur.png',
-  './assets/dinos/spinosaure_geant.png',
-  './assets/dinos/carnotaure_cornu.png'
+  './assets/apple-touch-icon.png'
 ];
 
 self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS_TO_CACHE);
-    })
-  );
+  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(CORE_FILES)));
   self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((keys) => {
-      return Promise.all(
-        keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))
-      );
-    })
+    caches.keys().then((keys) =>
+      Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key)))
+    )
   );
   self.clients.claim();
 });
 
 self.addEventListener('fetch', (event) => {
+  if (event.request.method !== 'GET') return;
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      return cachedResponse || fetch(event.request);
-    })
+    fetch(event.request)
+      .then((response) => {
+        if (response.ok) {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+        }
+        return response;
+      })
+      .catch(() => caches.match(event.request, { ignoreSearch: true }))
   );
 });
